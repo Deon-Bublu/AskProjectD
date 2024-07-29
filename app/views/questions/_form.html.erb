@@ -1,10 +1,4 @@
-<% if @question.errors.full_messages.each.any?  %>
-  <ul class="alert alert-danger">
-    <% @question.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render 'shared/errors', object: @question %>
 
 <%= form_with model: @question, data: {turbo: false} do |f| %>
     <div class="mb-3 row">
