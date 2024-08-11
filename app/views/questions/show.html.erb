@@ -31,7 +31,7 @@
 <h3 class="mt-5">Answers</h3>
 
 <% @answers.each do |answer| %>
-  <article class="mb-3">
+  <article class="mb-3" id="answer-<%= answer.id %>">
     <time datetime="<%= answer.formatted_created_at %>">
       <%= answer.formatted_created_at %>
     </time>

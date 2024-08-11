@@ -6,7 +6,7 @@ class AnswersController < ApplicationController
   def destroy
     @answer.destroy
     flash[:success] = "Answer deleted!"
-    redirect_to question_path(@question)
+    redirect_to question_path(@question, anchor: "answer-#{@answer.id}")
   end
   def create
     @answer = @question.answers.build answer_params
