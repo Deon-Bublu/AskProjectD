@@ -10,8 +10,10 @@
       </div>
     </section>
 
-    <%= link_to 'Edit', edit_question_answer_path(question, answer), class: 'btn btn-secondary btn-sm'%>
-    <%= link_to 'Delete', question_answer_path(question, answer), class: 'btn btn-danger btn-sm',
-                data: {method: :delete, confirm: "Are u ahuel tam?"} %>
+    <%= link_to 'Edit', edit_question_answer_path(question, answer),
+                class: 'btn btn-secondary btn-sm'%>
+    <%= link_to 'Delete', question_answer_path(question, answer),
+                class: 'btn btn-danger btn-sm',
+                data: {turbo_method: :delete, turbo_confirm: "Are u ahuel tam?"} %>
   </div>
 <% end %>
