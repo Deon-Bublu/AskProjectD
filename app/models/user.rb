@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :old_password
+  attr_accessor :old_password, :remember_token
 
   has_secure_password validations: false
 
@@ -13,7 +13,28 @@ class User < ApplicationRecord
 
   validate :password_complexity
 
+  def remember_me
+    self.remember_token = SecureRandom.urlsafe_base64
+    update_column :remember_token_digest, digest(remember_token)
+  end
+
+  def forget_me
+    update_column :remember_token_digest, nil
+    self.remember_token = nil
+  end
+  def remember_token_authenticated?(remember_token)
+    return false unless remember_token_digest.present?
+
+    BCrypt::Password.new(remember_token_digest).is_password?(remember_token)
+  end
+
   private
+
+  def digest(string)
+    cost = ActiveModel::SecurePassword.
+      min_cost ? BCrypt::Engine::MAX_COST : BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
   def password_complexity
     # Regexp extracted from https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
     return if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,70}$/
