@@ -1,4 +1,6 @@
-#обработка ошибок
+# frozen_string_literal: true
+
+# обработка ошибок
 module ErrorHandling
   extend ActiveSupport::Concern
 

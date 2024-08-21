@@ -1,0 +1,11 @@
+require:
+  - rubocop-rails
+  - rubocop-performance
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.3.0
+  SuggestExtensions: false
+
+Style/Documentation:
+  Enabled: false
